@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE struts PUBLIC
+      "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+      "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<!-- 设置后缀 -->
+   <constant name="struts.action.extension" value="action,do,,"></constant>
+	<!-- 修改后是否重启服务 -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<constant name="struts.devMode" value="true" />
+    
+	<package name="default" extends="struts-default">
+	<!-- <interceptors>
+	  <interceptor name="Hello" class=""></interceptor>
+	   <interceptor-stack name=""></interceptor-stack>
+	</interceptors> -->
+		<!--可以为一个Action写多个方法对应，可以减少Action类的数量，但是无法减少配置的数量		
+		<action name="hello" class="strutsDemoPage.HelloWorldAction"
+			method="execute">
+			<result name="success">/HelloWorld.jsp</result>
+		</action>
+		<action name="use_add" class="strutsDemoPage.HelloWorldAction" method="Add">
+		  <result name="add">/WEB-INF/Add.jsp</result>
+		</action>
+        -->
+         <!--法二 <action name="user" class="strutsDemoPage.HelloWorldAction">
+            <result name="add">/WEB-INF/Add.jsp</result>
+            <result name="execute">/HelloWorld.jsp</result>
+         </action>
+ -->        
+ <!-- 以通配符方式 -->
+         <action name="*_*" class="strutsDemoPage.{1}Action" method="{2}">
+         <!-- <interceptor-ref name=""></interceptor-ref> -->
+            <result>/WEB-INF/{1}/{2}.jsp</result>
+            <result type="redirect" name="r_list">/{1}_addlist.action</result>
+            
+         </action>
+	</package>
+</struts>
